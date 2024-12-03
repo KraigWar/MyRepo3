@@ -87,6 +87,7 @@ void mouseClicked(){
   inGame = true;
   startTime = millis();
   ghost.velocity.x = 2;
+  ghost.acceleration.x = 0.005;
   }
   if(gameOver){
       startScreen = true;
