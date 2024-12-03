@@ -1,6 +1,7 @@
 //Hello Attempt #3 of Implimenting all of this
 Ghost ghost;
 //set up booleans to check when the game is playing later
+boolean startScreen = true;
 boolean inGame = false;
 boolean gameOver = false;
 //set up a starting timer to track
@@ -30,12 +31,14 @@ void setup() {
 void draw() {
   //set background colour to a gray
   background(80, 80, 100);
-  if (!inGame) {
+  if(startScreen){
     StartScreen();
-  } else if (gameOver) {
-    GameOver();
-  } else {
+  }
+  if(inGame){
     runGame();
+  }
+  if(gameOver){
+    GameOver();
   }
 }
 
@@ -47,10 +50,12 @@ void runGame() {
   if (score >= targetScore) {
     hasWon = true;
     gameOver = true;
+    inGame = false;
     //if they instead took too long, make a game over happen
   } else if (elapsedTime >= timeLimit) {
     gameOver = true;
     hasWon = false;
+    inGame = false;
   }
   fill(255);
   textSize(20);
@@ -74,4 +79,18 @@ void GameOver() {
   }else {
   image(Lose, width/2, height/2);
 }
+}
+
+void mouseClicked(){
+  if(startScreen){
+    startScreen = false;
+  inGame = true;
+  startTime = millis();
+  ghost.velocity.x = 2;
+  }
+  if(gameOver){
+      startScreen = true;
+  gameOver = false;
+  }
+  
 }
