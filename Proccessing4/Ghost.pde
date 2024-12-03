@@ -1,13 +1,14 @@
 class Ghost {
   PVector position = new PVector(400, 200);
   PVector velocity = new PVector(2, 0);
-  PVector acceleration = new PVector(0.5, 0);
+  PVector acceleration = new PVector(0.005, 0);
   int size = 50;
 
   void update() {
     velocity.add(acceleration);
     position.add(velocity);
-
+    println(velocity);
+    println(position);
     if (position.x > width - size / 2 || position.x < 0 + size) {
       acceleration.x *= -1;
       velocity.x *= -1;
