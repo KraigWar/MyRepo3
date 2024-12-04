@@ -17,6 +17,7 @@ boolean hasWon = false;
 PImage Start;
 PImage Lose;
 PImage Wining;
+Machine[] machines = new Machine[6];
 
 
 void setup() {
@@ -26,18 +27,21 @@ void setup() {
   Start = loadImage("StartBut.png");
   Lose = loadImage("Over.png");
   Wining = loadImage("Win.png");
+  for (int i = 0; i < machines.length; i++) {
+    machines[i] = new Machine(50 + i * 150, 200);
+  }
 }
 
 void draw() {
   //set background colour to a gray
   background(80, 80, 100);
-  if(startScreen){
+  if (startScreen) {
     StartScreen();
   }
-  if(inGame){
+  if (inGame) {
     runGame();
   }
-  if(gameOver){
+  if (gameOver) {
     GameOver();
   }
 }
@@ -57,6 +61,15 @@ void runGame() {
     hasWon = false;
     inGame = false;
   }
+  
+  Fbackground();
+  
+  
+  for (int i = 0; i< machines.length; i++) {
+    machines[i].Mdisplay();
+  }
+  
+  
   fill(255);
   textSize(20);
   text("Score: " + score, 10, 30);
@@ -74,24 +87,31 @@ void StartScreen() {
 
 void GameOver() {
   background(0);
-  if(hasWon){
+  if (hasWon) {
     image(Wining, width/2, height/2);
-  }else {
-  image(Lose, width/2, height/2);
-}
+  } else {
+    image(Lose, width/2, height/2);
+  }
 }
 
-void mouseClicked(){
-  if(startScreen){
+  void Fbackground() {
+    for (int i = 0; i < height; i += 100) {
+      fill(50);
+      rect(0, i, width, 20);
+    }
+ }
+ 
+    
+void mouseClicked() {
+  if (startScreen) {
     startScreen = false;
-  inGame = true;
-  startTime = millis();
-  ghost.velocity.x = 2;
-  ghost.acceleration.x = 0.005;
+    inGame = true;
+    startTime = millis();
+    ghost.velocity.x = 2;
+    ghost.acceleration.x = 0.005;
   }
-  if(gameOver){
-      startScreen = true;
-  gameOver = false;
+  if (gameOver) {
+    startScreen = true;
+    gameOver = false;
   }
-  
 }
