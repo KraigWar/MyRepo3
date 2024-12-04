@@ -1,7 +1,7 @@
 class Ghost {
   PVector position = new PVector(400, 200);
-  PVector velocity = new PVector(2, 0);
-  PVector acceleration = new PVector(0.005, 0);
+  PVector velocity = new PVector(0.5, 0);
+  PVector acceleration = new PVector(0.09, 0);
   int size = 50;
 
   void update() {

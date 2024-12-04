@@ -28,7 +28,7 @@ void setup() {
   Lose = loadImage("Over.png");
   Wining = loadImage("Win.png");
   for (int i = 0; i < machines.length; i++) {
-    machines[i] = new Machine(50 + i * 150, 200);
+    machines[i] = new Machine(50 + i * 150, random(50,300));
   }
 }
 
@@ -104,26 +104,32 @@ void Fbackground() {
 }
 
 void checkghosthover() {
-  if (dist(mouseX, mouseY, ghost.position.x, ghost.position.y) < ghost.size / 2) {
+  if ((mouseX - 25 < ghost.position.x && mouseX + 25 > ghost.position.x) && (mouseY - 25 < ghost.position.y && mouseY + 25 > ghost.position.y)) {
+
     score++;
   }
 }
 
 
 void mouseClicked() {
+  int elapsedTime = (millis() - startTime) / 1000;
   if (startScreen) {
     startScreen = false;
     inGame = true;
     startTime = millis();
-    ghost.velocity.x = 2;
-    ghost.acceleration.x = 0.005;
+    ghost.position.x = 400;
+    ghost.velocity.x = 0.5;
+    ghost.acceleration.x = 0.09;
   }
   if (gameOver) {
+    if(elapsedTime > 3){
     startScreen = true;
     gameOver = false;
+  }
   }
 }
 
 void mousePressed() {
     checkghosthover();
+
 }
