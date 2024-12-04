@@ -8,6 +8,9 @@ boolean inGame = false;
 boolean gameOver = false;
 //---------------------------------------------------------------------------
 
+float getFrame;
+float time;
+
 //set up a start time
 int startTime = 0;
 //set the score limit
@@ -15,7 +18,7 @@ int targetScore = 10;
 //set the players score to default 0
 int score = 0;
 //set the amount of time the player will have
-int timeLimit = 10;
+int timeLimit = 600;
 //a boolean that will check if the player won or not
 boolean hasWon = false;
 //Declaring the image variables needed
@@ -28,6 +31,7 @@ Machine[] machines = new Machine[6];
 
 void setup() {
   size(800, 400);
+  frameRate = 60;
   //initialize the ghost object
   ghost = new Ghost();
   //set the image mode to centre so I can haev the images set to the middle of the screen when used
@@ -47,7 +51,6 @@ void setup() {
 void draw() {
   //set background colour to a gray
   background(80, 80, 100);
-
   //Connect the booleans with the functions created later to display them when they activate----------------------
   if (startScreen) {
     StartScreen();
@@ -64,18 +67,22 @@ void draw() {
 //Everything that will happen while the game is running
 void runGame() {
   //set a way to check the amount of time that has passed while playing. Must divide by 1000 to not be milliseconds
-  int elapsedTime = (millis() - startTime) / 1000;
+  //int elapsedTime = (millis() - startTime) / 1000;
+  //getFrame = frameCount;
   //Create the lose condition and win condition that will later display an indicator to the player
   //check if they won by reaching the targeted score
   if (score >= targetScore) {
     hasWon = true;
     gameOver = true;
     inGame = false;
+    //get the frame when the game starts for tracking the 
+    getFrame = frameCount;
     //if they instead took too long, make a game over happen
-  } else if (elapsedTime >= timeLimit) {
+  } else if (frameCount - getFrame > timeLimit) {
     gameOver = true;
     hasWon = false;
     inGame = false;
+    getFrame = frameCount;
   }
   //while the game is playing, diplay the background shapes
   Fbackground();
@@ -132,27 +139,26 @@ void checkghosthover() {
 
 
 void mouseClicked() {
-  //Declare a timer variable to fix issues of restarting the gmae once you win
-  int elapsedTime = (millis() - startTime) / 1000;
+  //Declare a timer variable to fix issues of restarting the game once you win
   if (startScreen) {
-     //if you are in the start screen and you click the mouse, stop the start screen and put you in the game
+    //if you are in the start screen and you click the mouse, stop the start screen and put you in the game
     startScreen = false;
-    inGame = true;
+    
     //Reset the timer when leaving the start screen so the game will reset properly and not lose right away
-    startTime = millis();
+    getFrame = frameCount;
+    inGame = true;
+    
     //reset the positin, velocity, and acceleration to the center whener the game 'resets'
     //If I do not do this with the 'update' function, if the game restarts with the ghost going to the left, when the game starts again it will try going the opposite direction
     ghost.position.x = 400;
-    ghost.velocity.x = 0.5;
-    ghost.acceleration.x = 0.09;
+    ghost.velocity.x = 0.1;
+    ghost.acceleration.x = 0.03;
   }
-  if (gameOver) {
-    //if the game is over wait for 3 seconds to make sure clicking the ghost to win doesn't skip this screen and starts the game right away
-    if (elapsedTime > 3) {
-      //if we are in the game over screen and you click, stop mkaing the gmae over screen and go back to the start screen 
-      startScreen = true;
-      gameOver = false;
-    }
+  if (gameOver && (frameCount - getFrame)>60) {
+    //if the game is over wait for 1 seconds to make sure clicking the ghost to win doesn't skip this screen and starts the game right away
+    //if we are in the game over screen and you click, stop mkaing the game over screen and go back to the start screen
+    startScreen = true;
+    gameOver = false;
   }
 }
 
