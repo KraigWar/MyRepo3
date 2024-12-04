@@ -143,7 +143,8 @@ void mouseClicked() {
     //if you are in the start screen and you click the mouse, stop the start screen and put you in the game
     startScreen = false;
     
-    //Reset the timer when leaving the start screen so the game will reset properly and not lose right away
+    //get the frame count to check later if the time has elapsed
+    //if you dont get it here, there is no way to count up to 10 seconds when playing the game
     getFrame = frameCount;
     inGame = true;
     
