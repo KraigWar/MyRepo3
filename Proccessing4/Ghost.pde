@@ -1,20 +1,22 @@
 class Ghost {
+  //initialize all the Pvectores with their parameters
   PVector position = new PVector(400, 200);
   PVector velocity = new PVector(0.5, 0);
   PVector acceleration = new PVector(0.09, 0);
+  //imitalize the size of the ghost
   int size = 50;
 
+  //function for adding velocity and acceleration as well as reversing the ghost when it hits the side
   void update() {
     velocity.add(acceleration);
     position.add(velocity);
-    println(velocity);
-    println(position);
+    //if statement to reverse the velocity and acceleration whenever it hits the sides of the screen
     if (position.x > width - size / 2 || position.x < 0 + size) {
       acceleration.x *= -1;
       velocity.x *= -1;
     }
   }
-  
+    //Creating the ghost illustration
     void display() {
     fill(255);
     noStroke();
