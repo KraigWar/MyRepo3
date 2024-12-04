@@ -32,8 +32,6 @@ Machine[] machines = new Machine[6];
 void setup() {
   size(800, 400);
   frameRate = 60;
-  //initialize the ghost object
-  ghost = new Ghost();
   //set the image mode to centre so I can haev the images set to the middle of the screen when used
   imageMode(CENTER);
   //initialize the actual image PNGs with variables to use later
@@ -72,7 +70,7 @@ void runGame() {
     hasWon = true;
     gameOver = true;
     inGame = false;
-    //get the frame when the game starts for tracking the 
+    //get the frame when the game starts for tracking the
     getFrame = frameCount;
     //if they instead took too long, make a game over happen
   } else if (frameCount - getFrame > timeLimit) {
@@ -140,14 +138,17 @@ void checkghosthover() {
 void mouseClicked() {
   //Declare a timer variable to fix issues of restarting the game once you win
   if (startScreen) {
+    //initialize the ghost object
+    ghost = new Ghost();
     //if you are in the start screen and you click the mouse, stop the start screen and put you in the game
     startScreen = false;
-    
+
     //get the frame count to check later if the time has elapsed
     //if you dont get it here, there is no way to count up to 10 seconds when playing the game
     getFrame = frameCount;
     inGame = true;
-    
+
+
     //reset the positin, velocity, and acceleration to the center whener the game 'resets'
     //If I do not do this with the 'update' function, if the game restarts with the ghost going to the left, when the game starts again it will try going the opposite direction
     ghost.position.x = 400;
@@ -164,5 +165,7 @@ void mouseClicked() {
 
 //Whenever you click with the mouse, run the check function to see it your over the ghost which will then increase your score
 void mousePressed() {
+  if(inGame){
   checkghosthover();
+  }
 }

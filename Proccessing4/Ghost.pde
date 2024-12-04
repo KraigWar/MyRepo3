@@ -1,11 +1,19 @@
 class Ghost {
   //initialize all the Pvectores with their parameters
   //Copied the initialization from previous in class practice
-  PVector position = new PVector(400, 200);
-  PVector velocity = new PVector(0.1, 0);
-  PVector acceleration = new PVector(0.03, 0);
+  PVector position;
+  PVector velocity;
+  PVector acceleration;
   //imitalize the size of the ghost
   int size = 50;
+  
+  
+  Ghost(){
+    position = new PVector(400,200);
+    velocity = new PVector(0.1,0);
+    acceleration = new PVector(0.03,0);
+  }
+    
 
   //function for adding velocity and acceleration as well as reversing the ghost when it hits the side
   //Copied the basic physics from previous project
