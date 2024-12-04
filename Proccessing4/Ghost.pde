@@ -1,8 +1,8 @@
 class Ghost {
   //initialize all the Pvectores with their parameters
   PVector position = new PVector(400, 200);
-  PVector velocity = new PVector(0.5, 0);
-  PVector acceleration = new PVector(0.09, 0);
+  PVector velocity = new PVector(0.1, 0);
+  PVector acceleration = new PVector(0.03, 0);
   //imitalize the size of the ghost
   int size = 50;
 
