@@ -44,6 +44,7 @@ void draw() {
   if (gameOver) {
     GameOver();
   }
+  println(score);
 }
 
 void runGame() {
@@ -61,15 +62,15 @@ void runGame() {
     hasWon = false;
     inGame = false;
   }
-  
+
   Fbackground();
-  
-  
+
+
   for (int i = 0; i< machines.length; i++) {
     machines[i].Mdisplay();
   }
-  
-  
+
+
   fill(255);
   textSize(20);
   text("Score: " + score, 10, 30);
@@ -82,6 +83,7 @@ void runGame() {
 void StartScreen() {
   background(0);
   image(Start, width/2, height/2);
+  score = 0;
 }
 
 
@@ -94,14 +96,20 @@ void GameOver() {
   }
 }
 
-  void Fbackground() {
-    for (int i = 0; i < height; i += 100) {
-      fill(50);
-      rect(0, i, width, 20);
-    }
- }
- 
-    
+void Fbackground() {
+  for (int i = 0; i < height; i += 100) {
+    fill(50);
+    rect(0, i, width, 20);
+  }
+}
+
+void checkghosthover() {
+  if (dist(mouseX, mouseY, ghost.position.x, ghost.position.y) < ghost.size / 2) {
+    score++;
+  }
+}
+
+
 void mouseClicked() {
   if (startScreen) {
     startScreen = false;
@@ -114,4 +122,8 @@ void mouseClicked() {
     startScreen = true;
     gameOver = false;
   }
+}
+
+void mousePressed() {
+    checkghosthover();
 }
