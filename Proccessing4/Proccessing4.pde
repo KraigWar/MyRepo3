@@ -104,6 +104,8 @@ void runGame() {
 //function for the start screen
 void StartScreen() {
   background(0);
+  textSize(20);
+  text("Click The Ghost 10 Times To Win", 265, 300);
   //display the start button in the center of the screen
   image(Start, width/2, height/2);
   //set the score back to 0 or else it will be an infite loop of winning the game with 10 + score
