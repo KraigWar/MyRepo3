@@ -66,9 +66,6 @@ void draw() {
 
 //Everything that will happen while the game is running
 void runGame() {
-  //set a way to check the amount of time that has passed while playing. Must divide by 1000 to not be milliseconds
-  //int elapsedTime = (millis() - startTime) / 1000;
-  //getFrame = frameCount;
   //Create the lose condition and win condition that will later display an indicator to the player
   //check if they won by reaching the targeted score
   if (score >= targetScore) {
