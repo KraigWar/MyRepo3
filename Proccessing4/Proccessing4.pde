@@ -148,12 +148,6 @@ void mouseClicked() {
     getFrame = frameCount;
     inGame = true;
 
-
-    //reset the positin, velocity, and acceleration to the center whener the game 'resets'
-    //If I do not do this with the 'update' function, if the game restarts with the ghost going to the left, when the game starts again it will try going the opposite direction
-    ghost.position.x = 400;
-    ghost.velocity.x = 0.1;
-    ghost.acceleration.x = 0.03;
   }
   if (gameOver && (frameCount - getFrame)>60) {
     //if the game is over wait for 1 seconds to make sure clicking the ghost to win doesn't skip this screen and starts the game right away
